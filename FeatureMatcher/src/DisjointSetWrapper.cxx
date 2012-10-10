@@ -4,14 +4,14 @@ using namespace std;
 
 
 
-
+/*
 void AddNewDisjointSetWrapper(string parent, Hash &hash);
 void AddNewElementToDisjointSet(string parent, string element, Hash &hash);
+*/
 
 
 
-
-void AddNewDisjointSetWrapper(string parent, Hash &hash)
+void AddNewDisjointSetWrapper(string parent, HashMap &hash)
 {
     DisjointSetWrapper newWrapper;
     vector<string> elements = vector<string>();
@@ -21,7 +21,7 @@ void AddNewDisjointSetWrapper(string parent, Hash &hash)
     (hash)[parent]=newWrapper;
 }
 
-void AddNewElementToDisjointSet(string parent, string element,Hash &hash)
+void AddNewElementToDisjointSet(string parent, string element,HashMap &hash)
 {
     DisjointSetWrapper parentWrapper = (hash).at(parent);
     parentWrapper.Elements.push_back(element);

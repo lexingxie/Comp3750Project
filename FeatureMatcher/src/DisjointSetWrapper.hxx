@@ -1,7 +1,8 @@
 #include <string>
 #include <vector>
-#include <boost/unordered_map.hpp>
+#include "boost/unordered_map.hpp"
 using namespace std;
+using namespace boost;
 
 typedef struct DisjointSetWrapper
 {
@@ -10,8 +11,8 @@ typedef struct DisjointSetWrapper
 
 } DisjointSetWrapper;
 
-typedef boost::unordered_map<std::string,DisjointSetWrapper> Hash;
+typedef boost::unordered_map<std::string, DisjointSetWrapper> HashMap;
 
-void AddNewDisjointSetWrapper(string parent, Hash &hash);
-void AddNewElementToDisjointSet(string parent, string element, Hash &hash);
+void AddNewDisjointSetWrapper(string parent, HashMap &hash);
+void AddNewElementToDisjointSet(string parent, string element, HashMap &hash);
 

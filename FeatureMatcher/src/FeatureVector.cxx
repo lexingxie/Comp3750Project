@@ -45,7 +45,7 @@ void CreateFeatureVectors(string file,float ** maxFeatureVector,vector<cv::Mat> 
         if (strcmp(deserializedVector->FileName,"MaxFeatureVector") == 0)
         {
             // instanciate max feature vector
-            for (j=0; j<json_array_size(jsonFeatureVectorValues); j++)
+            for (int j=0; j< (int) json_array_size(jsonFeatureVectorValues); j++)
             {
                 tmpValue = (float) json_real_value(json_array_get(jsonFeatureVectorValues,j));
                 (*maxFeatureVector)[j]= tmpValue;
@@ -54,8 +54,8 @@ void CreateFeatureVectors(string file,float ** maxFeatureVector,vector<cv::Mat> 
         else
         {
             cv::Mat tmpMat (1,162,CV_32FC1);
-            float tmpNorm=0.0;
-            for (j=0; j<json_array_size(jsonFeatureVectorValues); j++)
+            //float tmpNorm=0.0;
+            for (int j=0; j< (int)json_array_size(jsonFeatureVectorValues); j++)
             {
                 tmpValue = (float) json_real_value(json_array_get(jsonFeatureVectorValues,j));
                 tmpMat.row(0).col(j) = (float) json_real_value(json_array_get(jsonFeatureVectorValues,j));
@@ -112,11 +112,11 @@ FeatureVector* CreateFeatureVector(string file,const float* maxFeatureVector,int
     float tmpValue;
     cv::Mat tmpMat (1,162,CV_32FC1);
     float tmpNorm=0.0;
-    for (i=0; i<json_array_size(jsonFeatureVector); i++)
+    for (int i=0; i< (int) json_array_size(jsonFeatureVector); i++)
     {
         tmpValue = maxFeatureVector[i] != 0 ? (float)json_real_value(json_array_get(jsonFeatureVector,i))/maxFeatureVector[i] : 0.0;
         tmpMat.row(0).col(i) = tmpValue;
-        tmpNorm += pow(tmpValue,2.0);
+        tmpNorm += pow(tmpValue,2);
         tmpFeatureVector.push_back(tmpValue);
     }
 

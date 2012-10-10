@@ -27,15 +27,16 @@
 #include <vector>
 #include <string>
 #include <sys/types.h>
-#include "debug.hpp"
-#include "FeatureVector.hxx"
+#include "opencv2/core/core.hpp"
 #include "opencv2/features2d/features2d.hpp"
 #include "opencv2/highgui/highgui.hpp"
-#include <flann/flann.hpp>
-#include <boost/pending/disjoint_sets.hpp>
-#include "DisjointSetWrapper.hxx"
-#include <boost/unordered_map.hpp>
+//#include "opencv2/flann/flann.hpp"
+#include "boost/pending/disjoint_sets.hpp"
+#include "boost/unordered_map.hpp"
 
+//#include "debug.hpp"
+#include "FeatureVector.hxx"
+#include "DisjointSetWrapper.hxx"
 
 using namespace cv;
 using namespace std;
@@ -100,7 +101,7 @@ int main(int argc, char** argv)
 
     // Normalise all the feature vectors in dbFeatureVector
     // with the MaxFeatureVector
-    for (i=0; i<featureVectors.size(); i++)
+    for (int i=0; i< (int) featureVectors.size(); i++)
     {
         L2Norm = 0.0;
         // normalize files
@@ -113,7 +114,7 @@ int main(int argc, char** argv)
 
             }
 
-            L2Norm += pow(dbFeatureVectors[i].at<float>(0,j),2.0);
+            L2Norm += pow(dbFeatureVectors[i].at<float>(0,j),2);
         }
         // Store L2 Norm for later date
         featureVectors[i]->L2Norm = sqrt(L2Norm);
@@ -124,7 +125,7 @@ int main(int argc, char** argv)
     // calculate MaxFeatureVector L2 Norm
     for (i=0; i<BINS; i++)
     {
-        MaxFeatureVectorNorm += pow(MaxFeatureVector[i],2.0);
+        MaxFeatureVectorNorm += pow(MaxFeatureVector[i],2);
     }
     MaxFeatureVectorNorm = sqrt(MaxFeatureVectorNorm);
 
@@ -148,14 +149,14 @@ int main(int argc, char** argv)
     boost::associative_property_map<parent_t> parent_pmap(parent_map);
     vector<string> fileNameList = vector<string>();
 
-    for (vectorIndex=0; vectorIndex<featureVectors.size(); vectorIndex++)
+    for (vectorIndex=0; vectorIndex< (int) featureVectors.size(); vectorIndex++)
     {
-        fileNameList.push_back(featureVectors[vectorIndex]->FileName);
+        fileNameList.push_back( featureVectors[vectorIndex]->FileName);
     }
 
     boost::disjoint_sets<boost::associative_property_map<rank_t> ,boost::associative_property_map<parent_t> > dset = algo(rank_pmap, parent_pmap, fileNameList);
 
-    for (vectorIndex=0; vectorIndex<featureVectors.size(); vectorIndex+=1)
+    for (vectorIndex=0; vectorIndex<(int)featureVectors.size(); vectorIndex+=1)
     {
         //matcher.knnMatch(dbFeatureVectors[vectorIndex],kMatches,2);
         matcher.train();
@@ -163,11 +164,11 @@ int main(int argc, char** argv)
         float searchRadius = TAU*featureVectors[vectorIndex]->L2Norm/MaxFeatureVectorNorm;
         //cout << "Image file " << featureVectors[vectorIndex]->FileName <<" Search Radius " << searchRadius <<
         //    "l2 norm " << featureVectors[vectorIndex]->L2Norm << " max vector l2 " << MaxFeatureVectorNorm<< endl;
-        matcher.radiusMatch(dbFeatureVectors[vectorIndex],rMatches,searchRadius);
+        matcher.radiusMatch( dbFeatureVectors[vectorIndex], rMatches, searchRadius);
 
         vector<string> fileNames = vector<string>();
         string referenceFile = featureVectors[vectorIndex]->FileName;
-        for (i=1; i<rMatches[0].size(); i++)
+        for (i=1; i<(int)rMatches[0].size(); i++)
         {
             if (strcmp((featureVectors[rMatches[0][i].imgIdx]->FileName),((featureVectors[vectorIndex]->FileName) ))!= 0)
             {
@@ -185,7 +186,7 @@ int main(int argc, char** argv)
         }
     }
 
-    Hash fileNameCluster;
+    HashMap fileNameCluster;
 
     vector<string> parentList = vector<string>();
     for (vectorIndex=0; vectorIndex<featureVectors.size(); vectorIndex++)

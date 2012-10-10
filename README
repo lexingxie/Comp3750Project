@@ -1,2 +1,30 @@
+
 COMP3750 Project: Tracking Viral Youtube Videos
 Supervisor: Dr Lexing Xie
+
+Implementation: David Hehir, 2011 Semester 2
+
+-------
+Compilation notes on ubuntu / mac os x
+
+2012-10
+OpenCV 2.4.2
+Jansson 
+Boost 1.50
+
+
+== ColorCorrelogram 
+install opencv
+install libjansson-dev
+follow this to configure Eclipse CDT project
+http://docs.opencv.org/trunk/doc/tutorials/introduction/linux_eclipse/linux_eclipse.html
+
+(not on mac os w. macports the library path may be /opt/loca/lib)
+
+include the three core opencv libs (opencv_core opencv_imgproc opencv_highgui)
+
+== FeatuerMatcher -- 
+add boost root dir to include path
+
+include the three core opencv libs (opencv_core opencv_imgproc opencv_highgui)
+also include opencv_features2d opencv_flann for the linker
