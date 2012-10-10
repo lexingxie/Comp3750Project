@@ -1,2 +1,0 @@
-/* OpenCVHelper.h */
-int CompareScalar(CvScalar a, CvScalar b);
