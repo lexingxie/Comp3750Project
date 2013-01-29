@@ -1,8 +1,16 @@
-
 COMP3750 Project: Tracking Viral Youtube Videos
 Supervisor: Dr Lexing Xie
 
 Implementation: David Hehir, 2011 Semester 2
+
+----
+Please cite this paper if you use or build upon this code:
+
+Visual Memes in Social Media: Tracking Real-world News in YouTube Videos (2011)
+Lexing Xie, Apostol Natsev, Matthew Hill, John Kender, John R Smith 
+ACM Multimedia 2011, Scottsdale, AZ, USA, Nov 2011
+
+http://users.cecs.anu.edu.au/~xlx/proj/visualmemes.html
 
 -------
 Compilation notes on ubuntu / mac os x
