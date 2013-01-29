@@ -13,9 +13,12 @@ ACM Multimedia 2011, Scottsdale, AZ, USA, Nov 2011
 http://users.cecs.anu.edu.au/~xlx/proj/visualmemes.html
 
 -------
+Please see "./documentation/Install Guide.txt" for installation instructions. 
+
+-----------------
 Compilation notes on ubuntu / mac os x
 
-2012-10
+need the following open-source packages:
 OpenCV 2.4.2
 Jansson 
 Boost 1.50
